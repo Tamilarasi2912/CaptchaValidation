@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <title>Insert title here</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3>STUDENT REGISTER PAGE</h3>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/students/save}" method="POST" th:object="${student}">
+                <div class="row">
+                    <div class="col-2">
+                        <label>NAME</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{name}" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label>COURSE</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{course}" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+
+                        <label>ADDRESS</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="*{address}" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label>VERIFY</label>
+                    </div>
+                    <div class="col-4">
+                        <div class="g-recaptcha" data-sitekey="6LfgmBUqAAAAAH-11d2gje0eoK5RwmW4qx5uaGli"></div>
+                    </div>
+                </div>
+                <input type="submit" value="Add Student" class="btn btn-success" />
+                | <a th:href="@{/students/all}" class="btn btn-info">VIEW ALL</a>
+            </form>
+            <br/>
+            <div th:if="${message!=null}">
+                <span class="alert alert-danger" th:text="${message}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function recaptchaCallback(response) {
+        console.log("reCAPTCHA completed with response:", response);
+    }
+</script>
+</body>
+</html>
